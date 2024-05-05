@@ -68,7 +68,7 @@ jobs:
       - name: Clone mocha
         uses: actions/checkout@v3.5.2
         with:
-          repository: 'mtararujs/course-js-api-framework'
+          repository: 'raigodo/course-js-api-framework'
           path: dev-test
 
       - name: setup deps
