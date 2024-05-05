@@ -48,7 +48,6 @@ jobs:
     runs-on: self-hosted
     
     steps:
-
       - name: test api
         uses: Raigodo/kinda-cicd/.github/actions/test-api@main
         with:
