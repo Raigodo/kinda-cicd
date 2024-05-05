@@ -27,10 +27,10 @@ runs:
       with:
         dir: ${{inputs.dir}}
 
-    # - name: Stop previous
-    #     run: pm2 delete greetings-app-${{inputs.p-stg}} || true
-    #     working-directory: ${{inputs.p-stg}}
+    - name: Stop previous
+      run: pm2 delete greetings-app-${{inputs.p-stg}} || true
+      working-directory: ${{inputs.p-stg}}
 
-    # - name: Start dev API
-    #   run: pm2 start app.py --name greetings-app-${{inputs.stg}}
-    #   working-directory: ${{inputs.dir}}
+    - name: Start dev API
+      run: pm2 start app.py --name greetings-app-${{inputs.stg}}
+      working-directory: ${{inputs.dir}}
