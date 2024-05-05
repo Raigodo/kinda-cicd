@@ -1,0 +1,15 @@
+name: Example Workflow
+description: Some DEscription
+
+inputs:
+      msg:
+        required: true
+        type: string
+
+
+runs:
+  using: composite
+  steps:
+    - name: Print Message
+      shell: bash
+      run: echo Hi there, ${{inputs.msg}}
