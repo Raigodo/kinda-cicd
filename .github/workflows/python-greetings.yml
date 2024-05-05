@@ -41,10 +41,10 @@ jobs:
           stg: dev
 
       - name: stop launched api
-        run: pm2 delete all
-      #   uses: Raigodo/kinda-cicd/.github/actions/build@main
-      #   with:
-      #     stg: dev
+      #   run: pm2 delete all
+        uses: Raigodo/kinda-cicd/.github/actions/build@main
+        with:
+          stg: dev
 
   cleanup:
     name: cleaning up
