@@ -13,14 +13,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.5.2
 
-      - name: create dev folder
-        run: mkdir dev
+      - name: go to dev folder
+        run: | 
+          mkdir dev
+          cd dev
 
-      - name: Clone API
-        uses: actions/checkout@v3.5.2
-        with:
-          repository: 'mtararujs/python-greetings'
-          path: dev
+      # - name: Clone API
+      #   uses: actions/checkout@v3.5.2
+      #   with:
+      #     repository: 'mtararujs/python-greetings'
+          # path: dev
+        
+      - name: go back to root 
+        run: cd ..
 
   # tests-on-dev:
   #   name: Testing dev
@@ -31,11 +36,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3.5.2
 
-      - name: Clone mocha
-        uses: actions/checkout@v3.5.2
-        with:
-          repository: 'raigodo/course-js-api-framework'
-          path: other
+      - name: go to dev-test folder
+        run: | 
+          mkdir dev-test
+          cd dev-test
+      # - name: Clone mocha
+      #   uses: actions/checkout@v3.5.2
+      #   with:
+      #     repository: 'raigodo/course-js-api-framework'
+          # path: other
+          
+      - name: go back to root 
+        run: cd ..
 
 
 # jobs:
