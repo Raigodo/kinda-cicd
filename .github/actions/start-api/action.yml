@@ -7,7 +7,7 @@ inputs:
     type: string
   port:
     required: true
-    type: number
+    type: string
   stg:
     description: current stage name
     required: true
