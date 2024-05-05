@@ -54,8 +54,8 @@ jobs:
         with:
           stg: dev
 
-      - name: stop launched api
-        run: pm2 delete greetings-app-dev
+      # - name: stop launched api
+      #   run: pm2 delete greetings-app-dev
         
       
 
