@@ -1,10 +1,10 @@
 name: build api
 description: Fetch from https://github.com/mtararujs/python-greetings and setup
 
-inputs:
-      dir:
-        required: true
-        type: string
+# inputs:
+#       dir:
+#         required: true
+#         type: string
 
 runs:
   using: composite
@@ -16,8 +16,8 @@ runs:
       uses: actions/checkout@v3.5.2
       with:
         repository: 'mtararujs/python-greetings'
-        path: ${{inputs.dir}}
+        # path: ${{inputs.dir}}
       
     - name: Install dependencies
       run: pip3 install -r requirements.txt
-      working-directory: ${{inputs.dir}}
+      # working-directory: ${{inputs.dir}}
