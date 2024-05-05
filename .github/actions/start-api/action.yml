@@ -28,8 +28,8 @@ runs:
         dir: ${{inputs.dir}}
 
     - name: Stop previous
-      shell: powershell
-      run: pm2 delete greetings-app-${{inputs.p-stg}} | true
+      shell: cmd
+      run: pm2 delete greetings-app-${{inputs.p-stg}} & EXIT /B 0
       working-directory: ${{inputs.p-stg}}
 
     - name: Start dev API
