@@ -1,5 +1,5 @@
-name: build api
-description: Fetch from https://github.com/mtararujs/python-greetings and setup
+name: deploy and stop
+description: fetch api, setups it, launch it on specified port, and finally stops launched api instance
 
 inputs:
       stg:
@@ -12,7 +12,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: composite-action
+    - name: launch api
       uses: Raigodo/kinda-cicd/.github/actions/start-api@main
       with:
         stg: ${{inputs.stg}}
