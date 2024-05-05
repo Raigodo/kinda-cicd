@@ -28,3 +28,8 @@ runs:
       shell: cmd
       run: pm2 start app.py --name greetings-app-${{inputs.stg}}
       working-directory: ${{inputs.stg}}-api
+
+      
+    - name: echo
+      shell: powershell
+      run: echo "api launched sucefully"
