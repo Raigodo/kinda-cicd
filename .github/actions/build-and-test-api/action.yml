@@ -27,12 +27,12 @@ runs:
         repository: 'Raigodo/course-js-api-framework'
         path: ${{inputs.stg}}-test
 
-    - name: setup deps
+    - name: setup mocha dependencies
       shell: powershell
       run: npm install
       working-directory: ${{inputs.stg}}-test
 
-    - name: run tests
+    - name: run mocha tests
       shell: powershell
       run: npm run greetings greetings_${{inputs.stg}}
       working-directory: ${{inputs.stg}}-test
