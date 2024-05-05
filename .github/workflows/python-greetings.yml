@@ -17,6 +17,7 @@ jobs:
           
   install-pip-deps:
     name: build
+    needs: say-hi
     runs-on: self-hosted
 
     steps:
