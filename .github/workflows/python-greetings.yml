@@ -40,10 +40,10 @@ jobs:
           port: 7001
           stg: dev
 
-      - name: stop launched api
-        uses: Raigodo/kinda-cicd/.github/actions/build@main
-        with:
-          stg: dev
+      # - name: stop launched api
+      #   uses: Raigodo/kinda-cicd/.github/actions/build@main
+      #   with:
+      #     stg: dev
       
 # #DEV test
 #   tests-on-dev:
