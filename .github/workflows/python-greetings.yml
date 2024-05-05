@@ -1,28 +1,24 @@
-name: Main Workflow
-on: [push]
+name: Setup Flask API
+
+on:
+  push:
+    branches: [main, master]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  install-pip-deps:
+    name: build
+    runs-on: self-hosted
+
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Call Print Hello World
-        uses: Raigodo/kinda-cicd/.github/actions@main
+      - name: composite-action
+        uses: Raigodo/kinda-cicd/.github/actions/deploy.yml@main
         with:
-          message: "Hello World"
-
-
-
-# name: Setup Flask API
-
-# on:
-#   push:
-#     branches: [main, master]
-
-# jobs:
+          dir: build
+        
+#dep DEV
 #   deploy-to-dev:
 #     name: Deploying dev
+#     # needs: install-pip-deps
 #     runs-on: self-hosted
     
 #     steps:
@@ -35,280 +31,219 @@ jobs:
 #           repository: 'mtararujs/python-greetings'
 #           path: dev
         
-#       - name: go back to root 
-#         run: cd ..
+#       - name: Install dependencies
+#         run: pip3 install -r requirements.txt
+#         working-directory: dev
+      
+#       - name: Install pm2
+#         run: npm install -g pm2
+#         working-directory: dev
 
-#   # tests-on-dev:
-#   #   name: Testing dev
-#   #   needs: deploy-to-dev
-#   #   runs-on: self-hosted
+#       - name: Start API
+#         run: pm2 start app.py --name greetings-app-dev
+#         working-directory: dev
+      
+# #DEV test
+#   tests-on-dev:
+#     name: Testing dev
+#     needs: deploy-to-dev
+#     runs-on: self-hosted
     
-#     # steps:
-#       # - name: Checkout code
-#       #   uses: actions/checkout@v3.5.2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3.5.2
 
 #       - name: Clone mocha
 #         uses: actions/checkout@v3.5.2
 #         with:
 #           repository: 'raigodo/course-js-api-framework'
-#           path: other
-          
-#       - name: go back to root 
-#         run: cd ..
+#           path: dev-test
 
+#       - name: setup deps
+#         run: npm install
+#         working-directory: dev-test
 
-# # jobs:
-# #   install-pip-deps:
-# #     name: setup
-# #     runs-on: self-hosted
-
-# #     steps:
-# #       # - name: composite-action
-# #       #   uses: ./.github/actions/deploy.yml
-# #       #   # with:
-          
-# #       - name: Checkout code
-# #         uses: actions/checkout@v3.5.2
-
-# #       - name: Clone API
-# #         uses: actions/checkout@v3.5.2
-# #         with:
-# #           repository: 'mtararujs/python-greetings'
-# #           path: api
-
-# #       - name: Install dependencies
-# #         run: pip3 install -r requirements.txt
-# #         working-directory: api
-        
-# # #dep DEV
-# #   deploy-to-dev:
-# #     name: Deploying dev
-# #     # needs: install-pip-deps
-# #     runs-on: self-hosted
-    
-# #     steps:
-# #       - name: Checkout code
-# #         uses: actions/checkout@v3.5.2
-
-# #       - name: Clone API
-# #         uses: actions/checkout@v3.5.2
-# #         with:
-# #           repository: 'mtararujs/python-greetings'
-# #           path: dev
-        
-# #       - name: Install dependencies
-# #         run: pip3 install -r requirements.txt
-# #         working-directory: dev
-      
-# #       - name: Install pm2
-# #         run: npm install -g pm2
-# #         working-directory: dev
-
-# #       - name: Start API
-# #         run: pm2 start app.py --name greetings-app-dev
-# #         working-directory: dev
-      
-# # #DEV test
-# #   tests-on-dev:
-# #     name: Testing dev
-# #     needs: deploy-to-dev
-# #     runs-on: self-hosted
-    
-# #     steps:
-# #       - name: Checkout code
-# #         uses: actions/checkout@v3.5.2
-
-# #       - name: Clone mocha
-# #         uses: actions/checkout@v3.5.2
-# #         with:
-# #           repository: 'raigodo/course-js-api-framework'
-# #           path: dev-test
-
-# #       - name: setup deps
-# #         run: npm install
-# #         working-directory: dev-test
-
-# #       - name: run tests
-# #         run: npm run greetings greetings_dev
-# #         working-directory: dev-test
+#       - name: run tests
+#         run: npm run greetings greetings_dev
+#         working-directory: dev-test
 
         
-# # #STG dep
-# #   deploy-to-staging:
-# #     name: Deploying stg
-# #     needs: tests-on-dev
-# #     runs-on: self-hosted
+# #STG dep
+#   deploy-to-staging:
+#     name: Deploying stg
+#     needs: tests-on-dev
+#     runs-on: self-hosted
     
-# #     steps:
-# #       - name: Checkout code
-# #         uses: actions/checkout@v3.5.2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3.5.2
 
-# #       - name: Clone API
-# #         uses: actions/checkout@v3.5.2
-# #         with:
-# #           repository: 'mtararujs/python-greetings'
-# #           path: stg
+#       - name: Clone API
+#         uses: actions/checkout@v3.5.2
+#         with:
+#           repository: 'mtararujs/python-greetings'
+#           path: stg
       
-# #       - name: Install dependencies
-# #         run: pip3 install -r requirements.txt
-# #         working-directory: stg
+#       - name: Install dependencies
+#         run: pip3 install -r requirements.txt
+#         working-directory: stg
       
-# #       - name: Install pm2
-# #         run: npm install -g pm2
-# #         working-directory: stg
+#       - name: Install pm2
+#         run: npm install -g pm2
+#         working-directory: stg
 
-# #       # - name: Stop previous
-# #       #   run: "pm2 delete greetings-app-dev || true"
-# #       #   working-directory: stg
+#       # - name: Stop previous
+#       #   run: "pm2 delete greetings-app-dev || true"
+#       #   working-directory: stg
 
-# #       - name: Start dev API
-# #         run: pm2 start app.py --name greetings-app-dev
-# #         working-directory: stg
+#       - name: Start dev API
+#         run: pm2 start app.py --name greetings-app-dev
+#         working-directory: stg
       
-# # #STG test
-# #   tests-on-staging:
-# #     name: Testing stg
-# #     needs: deploy-to-staging
-# #     runs-on: self-hosted
+# #STG test
+#   tests-on-staging:
+#     name: Testing stg
+#     needs: deploy-to-staging
+#     runs-on: self-hosted
     
-# #     steps:
-# #       - name: Checkout code
-# #         uses: actions/checkout@v3.5.2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3.5.2
 
-# #       - name: Clone API
-# #         uses: actions/checkout@v3.5.2
-# #         with:
-# #           repository: 'raigodo/course-js-api-framework'
-# #           path: stg-test
+#       - name: Clone API
+#         uses: actions/checkout@v3.5.2
+#         with:
+#           repository: 'raigodo/course-js-api-framework'
+#           path: stg-test
 
-# #       - name: setup deps
-# #         run: npm install
-# #         working-directory: stg-test
+#       - name: setup deps
+#         run: npm install
+#         working-directory: stg-test
 
-# #       - name: run tests
-# #         run: npm run greetings greetings_stg
-# #         working-directory: stg-test
+#       - name: run tests
+#         run: npm run greetings greetings_stg
+#         working-directory: stg-test
 
 
-# # #PREPROD dep
-# #   deploy-to-preprod:
-# #     name: Deploying preprod
-# #     needs: tests-on-staging
-# #     runs-on: self-hosted
+# #PREPROD dep
+#   deploy-to-preprod:
+#     name: Deploying preprod
+#     needs: tests-on-staging
+#     runs-on: self-hosted
     
-# #     steps:
-# #       - name: Checkout code
-# #         uses: actions/checkout@v3.5.2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3.5.2
 
-# #       - name: Clone API
-# #         uses: actions/checkout@v3.5.2
-# #         with:
-# #           repository: 'mtararujs/python-greetings'
-# #           path: preprod
+#       - name: Clone API
+#         uses: actions/checkout@v3.5.2
+#         with:
+#           repository: 'mtararujs/python-greetings'
+#           path: preprod
       
-# #       - name: Install dependencies
-# #         run: pip3 install -r requirements.txt
-# #         working-directory: preprod
+#       - name: Install dependencies
+#         run: pip3 install -r requirements.txt
+#         working-directory: preprod
       
-# #       - name: Install pm2
-# #         run: npm install -g pm2
-# #         working-directory: preprod
+#       - name: Install pm2
+#         run: npm install -g pm2
+#         working-directory: preprod
 
-# #       # - name: Stop previous
-# #       #   run: pm2 delete greetings-app-stg
-# #       #   working-directory: preprod
+#       # - name: Stop previous
+#       #   run: pm2 delete greetings-app-stg
+#       #   working-directory: preprod
 
-# #       - name: Start dev API
-# #         run: pm2 start app.py --name greetings-app-dev
-# #         working-directory: preprod
+#       - name: Start dev API
+#         run: pm2 start app.py --name greetings-app-dev
+#         working-directory: preprod
       
-# # #PREPROD test
-# #   tests-on-preprod:
-# #     name: Testing preprod
-# #     needs: deploy-to-preprod
-# #     runs-on: self-hosted
+# #PREPROD test
+#   tests-on-preprod:
+#     name: Testing preprod
+#     needs: deploy-to-preprod
+#     runs-on: self-hosted
     
-# #     steps:
-# #       - name: Checkout code
-# #         uses: actions/checkout@v3.5.2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3.5.2
 
-# #       - name: Clone API
-# #         uses: actions/checkout@v3.5.2
-# #         with:
-# #           repository: 'raigodo/course-js-api-framework'
-# #           path: preprod-test
+#       - name: Clone API
+#         uses: actions/checkout@v3.5.2
+#         with:
+#           repository: 'raigodo/course-js-api-framework'
+#           path: preprod-test
 
-# #       - name: setup deps
-# #         run: npm install
-# #         working-directory: preprod-test
+#       - name: setup deps
+#         run: npm install
+#         working-directory: preprod-test
 
-# #       - name: run tests
-# #         run: npm run greetings greetings_prod
-# #         working-directory: preprod-test
+#       - name: run tests
+#         run: npm run greetings greetings_prod
+#         working-directory: preprod-test
 
 
-# # #PREPROD dep
-# #   deploy-to-prod:
-# #     name: Deploying prod
-# #     needs: tests-on-preprod
-# #     runs-on: self-hosted
+# #PREPROD dep
+#   deploy-to-prod:
+#     name: Deploying prod
+#     needs: tests-on-preprod
+#     runs-on: self-hosted
     
-# #     steps:
-# #       - name: Checkout code
-# #         uses: actions/checkout@v3.5.2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3.5.2
 
-# #       - name: Clone API
-# #         uses: actions/checkout@v3.5.2
-# #         with:
-# #           repository: 'mtararujs/python-greetings'
-# #           path: prod
+#       - name: Clone API
+#         uses: actions/checkout@v3.5.2
+#         with:
+#           repository: 'mtararujs/python-greetings'
+#           path: prod
       
-# #       - name: Install dependencies
-# #         run: pip3 install -r requirements.txt
-# #         working-directory: prod
+#       - name: Install dependencies
+#         run: pip3 install -r requirements.txt
+#         working-directory: prod
       
-# #       - name: Install pm2
-# #         run: npm install -g pm2
-# #         working-directory: prod
+#       - name: Install pm2
+#         run: npm install -g pm2
+#         working-directory: prod
 
-# #       # - name: Stop previous
-# #       #   run: pm2 delete greetings-app-preprod
-# #       #   working-directory: prod
+#       # - name: Stop previous
+#       #   run: pm2 delete greetings-app-preprod
+#       #   working-directory: prod
 
-# #       - name: Start dev API
-# #         run: pm2 start app.py --name greetings-app-dev
-# #         working-directory: prod
+#       - name: Start dev API
+#         run: pm2 start app.py --name greetings-app-dev
+#         working-directory: prod
       
-# # #PPROD test
-# #   tests-on-prod:
-# #     name: Testing prod
-# #     needs: deploy-to-prod
-# #     runs-on: self-hosted
+# #PPROD test
+#   tests-on-prod:
+#     name: Testing prod
+#     needs: deploy-to-prod
+#     runs-on: self-hosted
     
-# #     steps:
-# #       - name: Checkout code
-# #         uses: actions/checkout@v3.5.2
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v3.5.2
 
-# #       - name: Clone API
-# #         uses: actions/checkout@v3.5.2
-# #         with:
-# #           repository: 'raigodo/course-js-api-framework'
-# #           path: prod-test
+#       - name: Clone API
+#         uses: actions/checkout@v3.5.2
+#         with:
+#           repository: 'raigodo/course-js-api-framework'
+#           path: prod-test
 
-# #       - name: setup deps
-# #         run: npm install
-# #         working-directory: prod-test
+#       - name: setup deps
+#         run: npm install
+#         working-directory: prod-test
 
-# #       - name: run tests
-# #         run: npm run greetings greetings_prod
-# #         working-directory: prod-test
+#       - name: run tests
+#         run: npm run greetings greetings_prod
+#         working-directory: prod-test
 
-# #   # cleaning-up:
-# #   #   name: cleaning up
-# #   #   needs: tests-on-prod
-# #   #   runs-on: self-hosted
+#   # cleaning-up:
+#   #   name: cleaning up
+#   #   needs: tests-on-prod
+#   #   runs-on: self-hosted
 
-# #   #   steps:
-# #   #     - name: Stop api
-# #   #       run: pm2 delete greetings-app-prod
-# #   #       working-directory: prod
+#   #   steps:
+#   #     - name: Stop api
+#   #       run: pm2 delete greetings-app-prod
+#   #       working-directory: prod
