@@ -49,7 +49,7 @@ jobs:
     
     steps:
       - name: test api
-        uses: Raigodo/kinda-cicd/.github/actions/test-api@main
+        uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
         with:
           stg: dev
 
