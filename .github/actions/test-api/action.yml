@@ -31,3 +31,8 @@ runs:
       shell: powershell
       run: npm run greetings ${{inputs.env}}
       working-directory: ${{inputs.stg}}-test
+
+      
+    - name: echo
+      shell: powershell
+      run: echo "mocha tests succeeded"
