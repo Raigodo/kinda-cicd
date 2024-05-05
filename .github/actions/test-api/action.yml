@@ -36,4 +36,5 @@ runs:
 
       
     - name: stop launched api
+      shell: powershell
       run: pm2 delete greetings-app-${{inputs.stg}}
