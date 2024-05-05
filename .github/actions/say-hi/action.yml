@@ -12,4 +12,4 @@ runs:
   steps:
     - name: Print Message
       shell: powershell
-      run: echo Hi there, ${{inputs.msg}}
+      run: echo "Hi there, ${{inputs.msg}}"
