@@ -22,10 +22,10 @@ runs:
   steps:
     - uses: actions/checkout@v2
 
-    # - name: build and setup
-    #   uses: Raigodo/kinda-cicd/.github/actions/build@main
-    #   with:
-    #     dir: ${{inputs.dir}}
+    - name: build and setup
+      uses: Raigodo/kinda-cicd/.github/actions/build@main
+      with:
+        dir: ${{inputs.dir}}
 
     # - name: Stop previous
     #     run: pm2 delete greetings-app-${{inputs.p-stg}} || true
