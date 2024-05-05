@@ -1,31 +1,15 @@
 name: Example Workflow
-on: [push]
+description: Some DEscription
 
-using:
-  node: 16
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out code
-        uses: actions/checkout@v2
-      - name: Run script
-        run: npm install && npm test
+inputs:
+      message:
+        required: true
+        type: string
 
 
-# name: Print Hello World
-# # on:
-# #   workflow_call:
-# #     inputs:
-# #       message:
-# #         required: true
-# #         type: string
-
-# runs:
-#   # runs-on: ubuntu-latest
-#   steps:
-#     - name: Print Message
-#       run: echo Hi there
-#       shell: bash # Specify the shell here
-#       # run: echo "${{ inputs.message }}"
+runs:
+  using: composite
+  steps:
+    - name: Print Message
+      shell: bash
+      run: echo Hi there
