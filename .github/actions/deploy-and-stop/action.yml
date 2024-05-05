@@ -1,0 +1,22 @@
+name: build api
+description: Fetch from https://github.com/mtararujs/python-greetings and setup
+
+inputs:
+      stg:
+        required: true
+        type: string
+      port:
+        required: true
+        type: string
+
+runs:
+  using: composite
+  steps:
+    - name: composite-action
+      uses: Raigodo/kinda-cicd/.github/actions/start-api@main
+      with:
+        stg: ${{inputs.stg}}
+        port: ${{inputs.port}}
+
+    - name: stop launched api
+      run: pm2 delete greetings-app-${{inputs.stg}}
