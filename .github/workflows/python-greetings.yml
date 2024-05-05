@@ -5,15 +5,24 @@ on:
     branches: [main, master]
 
 jobs:
-  install-pip-deps:
-    name: build
-    runs-on: self-hosted
-
+  say-hi:
+    runs-on: ubuntu-latest
     steps:
-      - name: composite-action
-        uses: Raigodo/kinda-cicd/.github/actions/build@main
+      - uses: actions/checkout@v2
+
+      - name: Call Print Hello World
+        uses: Raigodo/kinda-cicd/.github/actions@main
         with:
-          dir: build
+          msg: "valters"
+  # install-pip-deps:
+  #   name: build
+  #   runs-on: self-hosted
+
+  #   steps:
+  #     - name: composite-action
+  #       uses: Raigodo/kinda-cicd/.github/actions/build@main
+  #       with:
+  #         dir: build
         
 #dep DEV
 #   deploy-to-dev:
