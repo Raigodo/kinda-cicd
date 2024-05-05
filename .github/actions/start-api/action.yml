@@ -2,7 +2,7 @@ name: build and fetch api
 description: launch build action and launch api
 
 inputs:
-  dir:
+  stg:
     required: true
     type: string
   port:
