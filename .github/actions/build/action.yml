@@ -14,12 +14,12 @@ runs:
 
     - name: Clone API
       uses: actions/checkout@v3.5.2
-      shell: cmd
+      shell: powershell
       with:
         repository: 'mtararujs/python-greetings'
         path: ${{inputs.dir}}
       
     - name: Install dependencies
-      shell: cmd
+      shell: powershell
       run: pip3 install -r requirements.txt
       working-directory: ${{inputs.dir}}
