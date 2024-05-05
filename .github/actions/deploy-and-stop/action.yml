@@ -21,3 +21,8 @@ runs:
     - name: stop launched api
       shell: powershell
       run: pm2 delete greetings-app-${{inputs.stg}}
+
+      
+    - name: echo
+      shell: powershell
+      run: echo "api built launched and stopped sucesfully"
