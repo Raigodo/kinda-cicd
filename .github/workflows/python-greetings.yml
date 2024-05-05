@@ -36,7 +36,7 @@ jobs:
       - name: composite-action
         uses: Raigodo/kinda-cicd/.github/actions/start-api@main
         with:
-          dir: build
+          dir: dev
           port: 7001
           stg: dev
       
