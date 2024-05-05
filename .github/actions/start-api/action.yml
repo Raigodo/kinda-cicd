@@ -3,19 +3,19 @@ description: launch build action and launch api
 
 inputs:
   dir:
-    required: true
-    type: string
-  port:
-    required: true
-    type: string
-  stg:
-    description: current stage name
-    required: true
-    type: string
-  p-stg:
-    description: previous stage name
-    required: false
-    type: string
+      required: true
+        type: string
+      port:
+        required: true
+        type: string
+      stg:
+        description: current stage name
+        required: true
+        type: string
+      p-stg:
+        description: previous stage name
+        required: false
+        type: string
 
 runs:
   using: composite
