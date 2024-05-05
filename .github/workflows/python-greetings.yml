@@ -41,10 +41,7 @@ jobs:
           stg: dev
 
       - name: stop launched api
-        run: pm2 delete greetings-app-${{inputs.stg}} & set "errorlevel=0"
-        # uses: Raigodo/kinda-cicd/.github/actions/build@main
-        # with:
-        #   stg: dev
+        run: pm2 delete greetings-app-dev
 
   cleanup:
     name: cleaning up
