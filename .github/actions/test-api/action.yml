@@ -19,9 +19,11 @@ runs:
         path: ${{inputs.stg}}-test
 
     - name: setup deps
+      shell: powershell
       run: npm install
       working-directory: ${{inputs.stg}}-test
 
     - name: run tests
+      shell: powershell
       run: npm run greetings greetings_${{inputs.stg}}
       working-directory: ${{inputs.stg}}-test
