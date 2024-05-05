@@ -16,21 +16,18 @@ jobs:
       - name: create dev folder
         run: mkdir dev
 
-      - name: create dev folder
-        run: mkdir dev-test
-
       - name: Clone API
         uses: actions/checkout@v3.5.2
         with:
           repository: 'mtararujs/python-greetings'
           path: dev
 
-  tests-on-dev:
-    name: Testing dev
-    needs: deploy-to-dev
-    runs-on: self-hosted
+  # tests-on-dev:
+  #   name: Testing dev
+  #   needs: deploy-to-dev
+  #   runs-on: self-hosted
     
-    steps:
+    # steps:
       - name: Checkout code
         uses: actions/checkout@v3.5.2
 
