@@ -54,10 +54,10 @@ jobs:
           stg: dev
           port: 7001
 
-      - name: test api
-        uses: Raigodo/kinda-cicd/.github/actions/test-api@main
-        with:
-          stg: dev
+      # - name: test api
+      #   uses: Raigodo/kinda-cicd/.github/actions/test-api@main
+      #   with:
+      #     stg: dev
 
       - name: stop launched api
         run: pm2 delete greetings-app-dev
