@@ -1,0 +1,18 @@
+name: stop api
+description: ensures launched api in specified stage is stopped
+
+inputs:
+  stg:
+    required: true
+    type: string
+    description: stop launched api from stage named ...
+
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/checkout@v2
+
+    - name: Stop previous
+      shell: cmd
+      run: pm2 delete greetings-app-${{inputs.stg}} & EXIT /B 0
