@@ -3,12 +3,12 @@ on: [push]
 
 jobs:
   main:
-    uses: raigodo/kinda-cicd/.github/workflows/print_hello_world.yml
-    with:
-      message: "valters"
-      environment: "dev"
-      dockerfile: "Dockerfile"
-      tag: "latest"
+    runs-on: ubuntu-latest
+    steps:
+    - name: composite action
+      uses: ./.github/actions
+      with:
+        message: valters
 
 
 # name: Setup Flask API
