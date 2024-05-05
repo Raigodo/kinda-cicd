@@ -6,10 +6,9 @@ name: Print Hello World
 #         required: true
 #         type: string
 
-jobs:
-  print:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Message
-        run: echo Hi there
-        # run: echo "${{ inputs.message }}"
+runs:
+  runs-on: ubuntu-latest
+  steps:
+    - name: Print Message
+      run: echo Hi there
+      # run: echo "${{ inputs.message }}"
