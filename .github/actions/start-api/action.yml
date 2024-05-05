@@ -28,7 +28,7 @@ runs:
     #   with:
     #     stg: ${{inputs.stg}}
 
-    # - name: Start dev API
-    #   shell: cmd
-    #   run: pm2 start app.py --name greetings-app-${{inputs.stg}}
-    #   working-directory: ${{inputs.dir}}
+    - name: Start dev API
+      shell: cmd
+      run: pm2 start app.py --name greetings-app-${{inputs.stg}}
+      working-directory: ${{inputs.dir}}
