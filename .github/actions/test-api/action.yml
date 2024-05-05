@@ -5,18 +5,16 @@ inputs:
       stg:
         required: true
         type: string
+      env:
+        required: true
+        type: string
+            
 
 runs:
   using: composite
   steps:
     - name: Checkout code
       uses: actions/checkout@v3.5.2
-
-    - name: start api
-      uses: Raigodo/kinda-cicd/.github/actions/start-api@main
-      with:
-        stg: ${{inputs.stg}}
-        port: 7001
   
     - name: Clone mocha
       uses: actions/checkout@v3.5.2
@@ -31,10 +29,5 @@ runs:
 
     - name: run tests
       shell: powershell
-      run: npm run greetings greetings_${{inputs.stg}}
+      run: npm run greetings ${{inputs.env}}
       working-directory: ${{inputs.stg}}-test
-
-      
-    - name: stop launched api
-      shell: powershell
-      run: pm2 delete greetings-app-${{inputs.stg}}
