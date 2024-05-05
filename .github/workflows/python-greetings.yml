@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: composite-action
-        uses: Raigodo/kinda-cicd/.github/actions/deploy.yml@main
+        uses: Raigodo/kinda-cicd/.github/actions/build@main
         with:
           dir: build
         
