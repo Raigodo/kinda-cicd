@@ -7,7 +7,7 @@ on:
 jobs:
   install-pip-deps:
     name: build
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: composite-action
