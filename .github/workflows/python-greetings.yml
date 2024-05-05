@@ -38,10 +38,10 @@ jobs:
           stg: dev
           port: 7001
 
-  #     - name: stop launched api
-  #       run: pm2 delete greetings-app-dev
+      - name: stop launched api
+        run: pm2 delete greetings-app-dev
+
       
-#DEV test
   # tests-on-dev:
   #   name: Testing dev
   #   # needs: deploy-to-dev
