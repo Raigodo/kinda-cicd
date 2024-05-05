@@ -15,4 +15,4 @@ runs:
 
     - name: Stop previous
       shell: cmd
-      run: pm2 delete app & set "errorlevel=0"
+      run: pm2 delete greetings-app-${{inputs.stg}} & set "errorlevel=0"
