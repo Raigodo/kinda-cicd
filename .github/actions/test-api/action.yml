@@ -11,6 +11,12 @@ runs:
   steps:
     - name: Checkout code
       uses: actions/checkout@v3.5.2
+
+    - name: start api
+      uses: Raigodo/kinda-cicd/.github/actions/start-api@main
+      with:
+        stg: dev
+        port: 7001
   
     - name: Clone mocha
       uses: actions/checkout@v3.5.2
