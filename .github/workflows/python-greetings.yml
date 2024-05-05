@@ -2,17 +2,17 @@ name: Main Workflow
 on: [push]
 
 jobs:
-  main:
+  build:
     runs-on: ubuntu-latest
-    
     steps:
-    - name: checkout
-      uses: actions/checkout@v2
-    
-    - name: composite action
-      uses: ./.github/actions
-      with:
-        message: valters
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Call Print Hello World
+        uses: ./.github/actions
+        with:
+          message: "Hello World"
+
 
 
 # name: Setup Flask API
