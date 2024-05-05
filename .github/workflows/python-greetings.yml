@@ -9,8 +9,8 @@ jobs:
 
       - name: Call Print Hello World
         uses: Raigodo/kinda-cicd/.github/actions@main
-        # with:
-        #   message: "Hello World"
+        with:
+          message: "Hello World"
 
 
 
