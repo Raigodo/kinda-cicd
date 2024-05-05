@@ -43,7 +43,7 @@ jobs:
       - name: stop launched api
         uses: Raigodo/kinda-cicd/.github/actions/build@main
         with:
-          stg: ${{inputs.p-stg}}
+          stg: dev
       
 # #DEV test
 #   tests-on-dev:
