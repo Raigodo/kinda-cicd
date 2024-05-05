@@ -11,5 +11,5 @@ runs:
   using: composite
   steps:
     - name: Print Message
-      shell: cmd
+      shell: powershell
       run: echo Hi there, ${{inputs.msg}}
