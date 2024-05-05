@@ -1,0 +1,40 @@
+name: test api
+description: Fetch from https://github.com/mtararujs/course-js-api-framework, setup and run tests
+
+inputs:
+      stg:
+        required: true
+        type: string
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3.5.2
+
+    - name: start api
+      uses: Raigodo/kinda-cicd/.github/actions/start-api@main
+      with:
+        stg: ${{inputs.stg}}
+        port: 7001
+  
+    - name: Clone mocha
+      uses: actions/checkout@v3.5.2
+      with:
+        repository: 'Raigodo/course-js-api-framework'
+        path: ${{inputs.stg}}-test
+
+    - name: setup deps
+      shell: powershell
+      run: npm install
+      working-directory: ${{inputs.stg}}-test
+
+    - name: run tests
+      shell: powershell
+      run: npm run greetings greetings_${{inputs.stg}}
+      working-directory: ${{inputs.stg}}-test
+
+      
+    - name: stop launched api
+      shell: powershell
+      run: pm2 delete greetings-app-${{inputs.stg}}
