@@ -44,6 +44,15 @@ jobs:
       #   uses: Raigodo/kinda-cicd/.github/actions/build@main
       #   with:
       #     stg: dev
+
+  cleanup:
+    name: cleaning up
+    needs: deploy-to-dev
+    runs-on: self-hosted
+
+    steps:
+      - name: say bye
+        run: echo "Bye bye <3"
       
 # #DEV test
 #   tests-on-dev:
