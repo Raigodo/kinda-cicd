@@ -6,7 +6,7 @@ on:
 
 jobs:
   install-pip-deps:
-    name: build
+    name: build api
     runs-on: self-hosted
 
     steps:
@@ -16,7 +16,7 @@ jobs:
           dir: build
         
   deploy-to-dev:
-    name: Deploying dev
+    name: Deploying dev api
     needs: install-pip-deps
     runs-on: self-hosted
     
@@ -27,9 +27,8 @@ jobs:
           stg: dev
           port: 7001
 
-      
   tests-on-dev:
-    name: Testing dev
+    name: Testing dev api
     needs: deploy-to-dev
     runs-on: self-hosted
     
@@ -38,179 +37,84 @@ jobs:
         uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
         with:
           stg: dev
+          port: 7001
         
-      
+  deploy-to-stg:
+    name: Deploying stg api
+    needs: tests-on-dev
+    runs-on: self-hosted
+    
+    steps:
+      - name: composite-action
+        uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
+        with:
+          stg: stg
+          port: 7002
 
+      
+  tests-on-stg:
+    name: Testing stg api
+    needs: deploy-to-stg
+    runs-on: self-hosted
+    
+    steps:
+      - name: test api
+        uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
+        with:
+          stg: stg
+          port: 7002
         
-# #STG dep
-#   deploy-to-staging:
-#     name: Deploying stg
-#     needs: tests-on-dev
-#     runs-on: self-hosted
+  deploy-to-preprod:
+    name: Deploying preprod api
+    needs: tests-on-stg
+    runs-on: self-hosted
     
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3.5.2
+    steps:
+      - name: composite-action
+        uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
+        with:
+          stg: preprod
+          port: 7003
 
-#       - name: Clone API
-#         uses: actions/checkout@v3.5.2
-#         with:
-#           repository: 'mtararujs/python-greetings'
-#           path: stg
       
-#       - name: Install dependencies
-#         run: pip3 install -r requirements.txt
-#         working-directory: stg
-      
-#       - name: Install pm2
-#         run: npm install -g pm2
-#         working-directory: stg
-
-#       # - name: Stop previous
-#       #   run: "pm2 delete greetings-app-dev || true"
-#       #   working-directory: stg
-
-#       - name: Start dev API
-#         run: pm2 start app.py --name greetings-app-dev
-#         working-directory: stg
-      
-# #STG test
-#   tests-on-staging:
-#     name: Testing stg
-#     needs: deploy-to-staging
-#     runs-on: self-hosted
+  tests-on-preprod:
+    name: Testing preprod
+    needs: deploy-to-preprod
+    runs-on: self-hosted
     
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3.5.2
-
-#       - name: Clone API
-#         uses: actions/checkout@v3.5.2
-#         with:
-#           repository: 'raigodo/course-js-api-framework'
-#           path: stg-test
-
-#       - name: setup deps
-#         run: npm install
-#         working-directory: stg-test
-
-#       - name: run tests
-#         run: npm run greetings greetings_stg
-#         working-directory: stg-test
-
-
-# #PREPROD dep
-#   deploy-to-preprod:
-#     name: Deploying preprod
-#     needs: tests-on-staging
-#     runs-on: self-hosted
+    steps:
+      - name: test preprod api
+        uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
+        with:
+          stg: preprod
+          port: 7003
+        
+  deploy-to-prod:
+    name: Deploying prod api
+    needs: tests-on-preprod
+    runs-on: self-hosted
     
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3.5.2
+    steps:
+      - name: composite-action
+        uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
+        with:
+          stg: prod
+          port: 7004
 
-#       - name: Clone API
-#         uses: actions/checkout@v3.5.2
-#         with:
-#           repository: 'mtararujs/python-greetings'
-#           path: preprod
       
-#       - name: Install dependencies
-#         run: pip3 install -r requirements.txt
-#         working-directory: preprod
-      
-#       - name: Install pm2
-#         run: npm install -g pm2
-#         working-directory: preprod
-
-#       # - name: Stop previous
-#       #   run: pm2 delete greetings-app-stg
-#       #   working-directory: preprod
-
-#       - name: Start dev API
-#         run: pm2 start app.py --name greetings-app-dev
-#         working-directory: preprod
-      
-# #PREPROD test
-#   tests-on-preprod:
-#     name: Testing preprod
-#     needs: deploy-to-preprod
-#     runs-on: self-hosted
+  tests-on-prod:
+    name: Testing prod api
+    needs: deploy-to-prod
+    runs-on: self-hosted
     
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3.5.2
+    steps:
+      - name: test prod api
+        uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
+        with:
+          stg: prod
+          port: 7004
 
-#       - name: Clone API
-#         uses: actions/checkout@v3.5.2
-#         with:
-#           repository: 'raigodo/course-js-api-framework'
-#           path: preprod-test
-
-#       - name: setup deps
-#         run: npm install
-#         working-directory: preprod-test
-
-#       - name: run tests
-#         run: npm run greetings greetings_prod
-#         working-directory: preprod-test
-
-
-# #PREPROD dep
-#   deploy-to-prod:
-#     name: Deploying prod
-#     needs: tests-on-preprod
-#     runs-on: self-hosted
-    
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3.5.2
-
-#       - name: Clone API
-#         uses: actions/checkout@v3.5.2
-#         with:
-#           repository: 'mtararujs/python-greetings'
-#           path: prod
       
-#       - name: Install dependencies
-#         run: pip3 install -r requirements.txt
-#         working-directory: prod
-      
-#       - name: Install pm2
-#         run: npm install -g pm2
-#         working-directory: prod
-
-#       # - name: Stop previous
-#       #   run: pm2 delete greetings-app-preprod
-#       #   working-directory: prod
-
-#       - name: Start dev API
-#         run: pm2 start app.py --name greetings-app-dev
-#         working-directory: prod
-      
-# #PPROD test
-#   tests-on-prod:
-#     name: Testing prod
-#     needs: deploy-to-prod
-#     runs-on: self-hosted
-    
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3.5.2
-
-#       - name: Clone API
-#         uses: actions/checkout@v3.5.2
-#         with:
-#           repository: 'raigodo/course-js-api-framework'
-#           path: prod-test
-
-#       - name: setup deps
-#         run: npm install
-#         working-directory: prod-test
-
-#       - name: run tests
-#         run: npm run greetings greetings_prod
-#         working-directory: prod-test
 
 #   # cleaning-up:
 #   #   name: cleaning up
