@@ -15,5 +15,9 @@ runs:
 
     - name: Stop previous
       shell: cmd
-      run: pm2 delete all
-      # run: pm2 delete greetings-app-${{inputs.stg}} & set "errorlevel=0" & EXIT /B 0
+      run: pm2 delete greetings-app-${{inputs.stg}}
+
+      
+    - name: echo
+      shell: powershell
+      run: echo "api stopped sucefully"
