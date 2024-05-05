@@ -5,15 +5,15 @@ on:
     branches: [main, master]
 
 jobs:
-  say-hi:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v2
+  # say-hi:
+  #   runs-on: self-hosted
+  #   steps:
+  #     - uses: actions/checkout@v2
 
-      - name: Call Print Hello World
-        uses: Raigodo/kinda-cicd/.github/actions/say-hi@main
-        with:
-          msg: "valters"
+  #     - name: Call Print Hello World
+  #       uses: Raigodo/kinda-cicd/.github/actions/say-hi@main
+  #       with:
+  #         msg: "valters"
           
   install-pip-deps:
     name: build
