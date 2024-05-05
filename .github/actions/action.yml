@@ -1,0 +1,13 @@
+name: Print Hello World
+
+inputs:
+  message:
+    required: true
+    type: string
+
+
+runs:
+  using: composite
+  steps:
+    - name: Print Message
+      run: echo "${{ inputs.message }}"
