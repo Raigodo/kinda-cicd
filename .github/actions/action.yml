@@ -11,4 +11,5 @@ runs:
   steps:
     - name: Print Message
       run: echo Hi there
+      shell: bash # Specify the shell here
       # run: echo "${{ inputs.message }}"
