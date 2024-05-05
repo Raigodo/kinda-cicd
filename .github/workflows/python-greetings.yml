@@ -27,32 +27,18 @@ jobs:
           dir: build
         
 #dep DEV
-#   deploy-to-dev:
-#     name: Deploying dev
-#     # needs: install-pip-deps
-#     runs-on: self-hosted
+  deploy-to-dev:
+    name: Deploying dev
+    needs: install-pip-deps
+    runs-on: self-hosted
     
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v3.5.2
-
-#       - name: Clone API
-#         uses: actions/checkout@v3.5.2
-#         with:
-#           repository: 'mtararujs/python-greetings'
-#           path: dev
-        
-#       - name: Install dependencies
-#         run: pip3 install -r requirements.txt
-#         working-directory: dev
-      
-#       - name: Install pm2
-#         run: npm install -g pm2
-#         working-directory: dev
-
-#       - name: Start API
-#         run: pm2 start app.py --name greetings-app-dev
-#         working-directory: dev
+    steps:
+      - name: composite-action
+        uses: Raigodo/kinda-cicd/.github/actions/start-api@main
+        with:
+          dir: build
+          port: 7001
+          stg: dev
       
 # #DEV test
 #   tests-on-dev:
