@@ -17,7 +17,7 @@ runs:
     - name: build and setup
       uses: Raigodo/kinda-cicd/.github/actions/build@main
       with:
-        dir: ${{inputs.stg}}
+        dir: ${{inputs.stg}}-api
 
     # - name: ensure api is not running
     #   uses: Raigodo/kinda-cicd/.github/actions/stop-api@main
@@ -27,4 +27,4 @@ runs:
     - name: Start dev API
       shell: cmd
       run: pm2 start app.py --name greetings-app-${{inputs.stg}}
-      working-directory: ${{inputs.stg}}-dir
+      working-directory: ${{inputs.stg}}-api
