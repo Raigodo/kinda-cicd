@@ -4,7 +4,11 @@ on: [push]
 jobs:
   main:
     runs-on: ubuntu-latest
+    
     steps:
+    - name: checkout
+      uses: actions/checkout@v2
+    
     - name: composite action
       uses: ./.github/actions
       with:
