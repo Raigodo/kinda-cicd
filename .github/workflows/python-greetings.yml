@@ -2,16 +2,13 @@ name: Main Workflow
 on: [push]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Call Print Hello World
-        uses: ./.github/workflows/print_hello_world.yml
-        with:
-          message: "Hello World"
+  main:
+    uses: raigodo/kinda-cicd/.github/workflows/print_hello_world.yml
+    with:
+      message: "valters"
+      environment: "dev"
+      dockerfile: "Dockerfile"
+      tag: "latest"
 
 
 # name: Setup Flask API
