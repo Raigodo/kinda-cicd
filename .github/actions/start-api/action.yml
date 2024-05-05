@@ -1,5 +1,5 @@
-name: build and fetch api
-description: launch build action and launch api
+name: deploy api
+description: setups api and launches it on specified port
 
 inputs:
   stg:
