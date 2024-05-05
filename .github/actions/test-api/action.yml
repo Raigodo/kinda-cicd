@@ -15,7 +15,7 @@ runs:
     - name: start api
       uses: Raigodo/kinda-cicd/.github/actions/start-api@main
       with:
-        stg: dev
+        stg: ${{inputs.stg}}
         port: 7001
   
     - name: Clone mocha
@@ -33,3 +33,7 @@ runs:
       shell: powershell
       run: npm run greetings greetings_${{inputs.stg}}
       working-directory: ${{inputs.stg}}-test
+
+      
+    - name: stop launched api
+      run: pm2 delete greetings-app-${{inputs.stg}}
