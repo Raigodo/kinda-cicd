@@ -4,115 +4,115 @@ on:
   push:
     branches: [main, master]
 
-jobs:
-  install-pip-deps:
-    name: build api
-    runs-on: self-hosted
+# jobs:
+  # install-pip-deps:
+  #   name: build api
+  #   runs-on: self-hosted
 
-    steps:
-      - name: composite-action
-        uses: Raigodo/kinda-cicd/.github/actions/build@main
-        with:
-          dir: build
+  #   steps:
+  #     - name: composite-action
+  #       uses: Raigodo/kinda-cicd/.github/actions/build@main
+  #       with:
+  #         dir: build
         
-  deploy-to-dev:
-    name: Deploying dev api
-    needs: install-pip-deps
-    runs-on: self-hosted
+  # deploy-to-dev:
+  #   name: Deploying dev api
+  #   needs: install-pip-deps
+  #   runs-on: self-hosted
     
-    steps:
-      - name: composite-action
-        uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
-        with:
-          stg: dev
-          port: 7001
+  #   steps:
+  #     - name: composite-action
+  #       uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
+  #       with:
+  #         stg: dev
+  #         port: 7001
 
-  tests-on-dev:
-    name: Testing dev api
-    needs: deploy-to-dev
-    runs-on: self-hosted
+  # tests-on-dev:
+  #   name: Testing dev api
+  #   needs: deploy-to-dev
+  #   runs-on: self-hosted
     
-    steps:
-      - name: test api
-        uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
-        with:
-          stg: dev
-          port: 7001
+  #   steps:
+  #     - name: test api
+  #       uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
+  #       with:
+  #         stg: dev
+  #         port: 7001
         
-  deploy-to-stg:
-    name: Deploying stg api
-    needs: tests-on-dev
-    runs-on: self-hosted
+  # deploy-to-stg:
+  #   name: Deploying stg api
+  #   needs: tests-on-dev
+  #   runs-on: self-hosted
     
-    steps:
-      - name: composite-action
-        uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
-        with:
-          stg: stg
-          port: 7002
+  #   steps:
+  #     - name: composite-action
+  #       uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
+  #       with:
+  #         stg: stg
+  #         port: 7002
 
       
-  tests-on-stg:
-    name: Testing stg api
-    needs: deploy-to-stg
-    runs-on: self-hosted
+  # tests-on-stg:
+  #   name: Testing stg api
+  #   needs: deploy-to-stg
+  #   runs-on: self-hosted
     
-    steps:
-      - name: test api
-        uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
-        with:
-          stg: stg
-          port: 7002
+  #   steps:
+  #     - name: test api
+  #       uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
+  #       with:
+  #         stg: stg
+  #         port: 7002
         
-  deploy-to-preprod:
-    name: Deploying preprod api
-    needs: tests-on-stg
-    runs-on: self-hosted
+  # deploy-to-preprod:
+  #   name: Deploying preprod api
+  #   needs: tests-on-stg
+  #   runs-on: self-hosted
     
-    steps:
-      - name: composite-action
-        uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
-        with:
-          stg: preprod
-          port: 7003
+  #   steps:
+  #     - name: composite-action
+  #       uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
+  #       with:
+  #         stg: preprod
+  #         port: 7003
 
       
-  tests-on-preprod:
-    name: Testing preprod
-    needs: deploy-to-preprod
-    runs-on: self-hosted
+  # tests-on-preprod:
+  #   name: Testing preprod
+  #   needs: deploy-to-preprod
+  #   runs-on: self-hosted
     
-    steps:
-      - name: test preprod api
-        uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
-        with:
-          stg: preprod
-          port: 7003
+  #   steps:
+  #     - name: test preprod api
+  #       uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
+  #       with:
+  #         stg: preprod
+  #         port: 7003
         
-  deploy-to-prod:
-    name: Deploying prod api
-    needs: tests-on-preprod
-    runs-on: self-hosted
+  # deploy-to-prod:
+  #   name: Deploying prod api
+  #   needs: tests-on-preprod
+  #   runs-on: self-hosted
     
-    steps:
-      - name: composite-action
-        uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
-        with:
-          stg: prod
-          port: 7004
+  #   steps:
+  #     - name: composite-action
+  #       uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
+  #       with:
+  #         stg: prod
+  #         port: 7004
 
       
-  tests-on-prod:
-    name: Testing prod api
-    needs: deploy-to-prod
-    runs-on: self-hosted
+  # tests-on-prod:
+  #   name: Testing prod api
+  #   needs: deploy-to-prod
+  #   runs-on: self-hosted
     
-    steps:
-      - name: test prod api
-        uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
-        with:
-          stg: prod
-          port: 7004
+  #   steps:
+  #     - name: test prod api
+  #       uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
+  #       with:
+  #         stg: prod
+  #         port: 7004
 
       
 
