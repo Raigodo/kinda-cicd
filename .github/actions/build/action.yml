@@ -14,7 +14,6 @@ runs:
 
     - name: Clone API
       uses: actions/checkout@v3.5.2
-      shell: powershell
       with:
         repository: 'mtararujs/python-greetings'
         path: ${{inputs.dir}}
