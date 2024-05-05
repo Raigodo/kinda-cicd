@@ -5,46 +5,32 @@ on:
     branches: [main, master]
 
 jobs:
-  # say-hi:
-  #   runs-on: self-hosted
-  #   steps:
-  #     - uses: actions/checkout@v2
+  install-pip-deps:
+    name: build
+    runs-on: self-hosted
 
-  #     - name: Call Print Hello World
-  #       uses: Raigodo/kinda-cicd/.github/actions/say-hi@main
-  #       with:
-  #         msg: "valters"
-          
-  # install-pip-deps:
-  #   name: build
-  #   # needs: say-hi
-  #   runs-on: self-hosted
-
-  #   steps:
-  #     - name: composite-action
-  #       uses: Raigodo/kinda-cicd/.github/actions/build@main
-  #       with:
-  #         dir: build
+    steps:
+      - name: composite-action
+        uses: Raigodo/kinda-cicd/.github/actions/build@main
+        with:
+          dir: build
         
-  # deploy-to-dev:
-  #   name: Deploying dev
-  #   # needs: install-pip-deps
-  #   runs-on: self-hosted
+  deploy-to-dev:
+    name: Deploying dev
+    needs: install-pip-deps
+    runs-on: self-hosted
     
-  #   steps:
-  #     - name: composite-action
-  #       uses: Raigodo/kinda-cicd/.github/actions/start-api@main
-  #       with:
-  #         stg: dev
-  #         port: 7001
-
-  #     - name: stop launched api
-  #       run: pm2 delete greetings-app-dev
+    steps:
+      - name: composite-action
+        uses: Raigodo/kinda-cicd/.github/actions/deploy-and-stop@main
+        with:
+          stg: dev
+          port: 7001
 
       
   tests-on-dev:
     name: Testing dev
-    # needs: deploy-to-dev
+    needs: deploy-to-dev
     runs-on: self-hosted
     
     steps:
@@ -52,9 +38,6 @@ jobs:
         uses: Raigodo/kinda-cicd/.github/actions/build-and-test-api@main
         with:
           stg: dev
-
-      # - name: stop launched api
-      #   run: pm2 delete greetings-app-dev
         
       
 
