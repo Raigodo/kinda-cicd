@@ -23,10 +23,10 @@ runs:
       with:
         dir: ${{inputs.dir}}
 
-    - name: ensure api is not running
-      uses: Raigodo/kinda-cicd/.github/actions/stop-api@main
-      with:
-        stg: ${{inputs.stg}}
+    # - name: ensure api is not running
+    #   uses: Raigodo/kinda-cicd/.github/actions/stop-api@main
+    #   with:
+    #     stg: ${{inputs.stg}}
 
     - name: Start dev API
       shell: powershell
