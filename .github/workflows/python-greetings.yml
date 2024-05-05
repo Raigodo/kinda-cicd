@@ -15,15 +15,15 @@ jobs:
         with:
           msg: "valters"
           
-  # install-pip-deps:
-  #   name: build
-  #   runs-on: self-hosted
+  install-pip-deps:
+    name: build
+    runs-on: self-hosted
 
-  #   steps:
-  #     - name: composite-action
-  #       uses: Raigodo/kinda-cicd/.github/actions/build@main
-  #       with:
-  #         dir: build
+    steps:
+      - name: composite-action
+        uses: Raigodo/kinda-cicd/.github/actions/build@main
+        with:
+          dir: build
         
 #dep DEV
 #   deploy-to-dev:
