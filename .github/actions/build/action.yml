@@ -1,5 +1,5 @@
 name: build api
-description: Fetch from https://github.com/mtararujs/python-greetings and setup
+description: Fetch from https://github.com/mtararujs/python-greetings, put in folder (dir) and setup project dependencies
 
 inputs:
       dir:
