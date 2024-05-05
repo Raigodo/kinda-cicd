@@ -1,5 +1,5 @@
-name: test api
-description: Fetch from https://github.com/mtararujs/course-js-api-framework, setup and run tests
+name: build and test api using mocha
+description: fetches api and mocha project, put them in according folders to specified stage (stg), install dependencies, launches api and perform tests on api using localhost with specified port
 
 inputs:
       stg:
