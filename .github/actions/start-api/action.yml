@@ -8,10 +8,6 @@ inputs:
   port:
     required: true
     type: string
-  stg:
-    required: true
-    type: string
-    description: current stage name
 
 runs:
   using: composite
@@ -21,7 +17,7 @@ runs:
     - name: build and setup
       uses: Raigodo/kinda-cicd/.github/actions/build@main
       with:
-        dir: ${{inputs.dir}}
+        dir: ${{inputs.stg}}
 
     # - name: ensure api is not running
     #   uses: Raigodo/kinda-cicd/.github/actions/stop-api@main
@@ -31,4 +27,4 @@ runs:
     - name: Start dev API
       shell: cmd
       run: pm2 start app.py --name greetings-app-${{inputs.stg}}
-      working-directory: ${{inputs.dir}}
+      working-directory: ${{inputs.stg}}-dir
